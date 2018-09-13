@@ -7,9 +7,10 @@ class CList
 {
 private:
     CNode<T>* m_Head;
+    CNode<T>* m_Tail;
 public:
     CList ();
-    ~CList () {delete m_Head;}
+    ~CList ();
    //ajout en tête de liste
     void push_front (const T & val);
    //affichage
@@ -20,10 +21,11 @@ public:
     void Add (const T & val, CNode<T>* ptr);
     //détache un maillon de la liste et le supprime
     void Delete (CNode<T>* pDelete);
+    void push_back(const T& val);
 };
 
 template <typename T>
-CList<T>::CList(): m_Head (nullptr) {}
+CList<T>::CList(): m_Head (nullptr), m_Tail (nullptr) {}
 
 template <typename T>
 void CList<T>::push_front(const T& val)
@@ -36,6 +38,13 @@ void CList<T>::Show() const
 {
     for(CNode<T>* ptr (m_Head); ptr != nullptr; ptr =ptr->GetNextNode())
         std::cout<<ptr->GetData()<<';';
+}
+
+template <typename T>
+CList<T>::~CList()
+{
+    delete m_Head;
+    delete m_Tail;
 }
 
 template <typename T>
@@ -70,3 +79,11 @@ void CList<T>::Delete (CNode<T>* pDelete)
     delete pDelete;
 
 } // Delete()
+
+template <typename T>
+void CList<T>::push_back(const T& val)
+{
+    CNode<T>* pTmp = new CNode<T> (val,NULL);
+    m_Tail -> SetNextNode(pTmp);
+    m_Tail = pTmp;
+}

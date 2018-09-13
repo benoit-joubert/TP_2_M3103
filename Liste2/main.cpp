@@ -26,6 +26,12 @@ void ListeSimpleV2 ()
 
     cout << ((ptr != NULL)?  " " : "non ") << "trouve" << endl;
 
+    AList.Show();
+    int j;
+    cin >>j;
+    AList.push_back(j);
+    AList.Show();
+
 }
 
 int main()
