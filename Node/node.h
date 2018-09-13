@@ -12,7 +12,7 @@ public:
     //destructor
     ~CNode ();
     //getter
-    T GetData() const {return m_Data;}
+    const T &GetData();
     CNode* GetNextNode() const {return m_Next;}
     // setter
     void setData(T Val) {m_Data = Val;}
@@ -27,4 +27,11 @@ CNode<T>::~CNode()
 {
     std::cout<<m_Next<<std::endl;
     delete m_Next;
+}
+
+template <typename T>
+const T & CNode<T>::GetData()
+{
+    std::cout <<&m_Data<<std::endl;
+    return m_Data;
 }
